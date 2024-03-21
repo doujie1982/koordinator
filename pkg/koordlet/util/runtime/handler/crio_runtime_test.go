@@ -42,7 +42,7 @@ func Test_NewCrioRuntimeHandler(t *testing.T) {
 
 	helper.WriteFileContents("/var/run/crio/crio.sock", "test")
 	system.Conf.VarRunRootDir = filepath.Join(helper.TempDir, "/var/run")
-	ContainerdEndpoint1 := GetCrioEndpoint()
+	CrioEndpoint1 := GetCrioEndpoint()
 	unixEndPoint := fmt.Sprintf("unix://%s", CrioEndpoint1)
 	crioRuntime, err := NewCrioRuntimeHandler(unixEndPoint)
 	assert.NoError(t, err)
