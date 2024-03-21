@@ -109,7 +109,7 @@ func Test_ParseContainerIDSystemd(t *testing.T) {
 			expeceted: "12345",
 		},
 		{
-			basename:  "cri-o-12345.scope",
+			basename:  "crio-12345.scope",
 			expeceted: "12345",
 		},
 		{
@@ -187,7 +187,7 @@ func Test_SystemdCgroupPathContainerDirFn(t *testing.T) {
 			name:        "cri-o",
 			containerID: "cri-o://testCrioContainerID",
 			wantType:    RuntimeTypeCrio,
-			wantDirName: "cri-o.scope",
+			wantDirName: "crio-testCrioContainerID.scope",
 			wantError:   false,
 		},
 		{
@@ -239,7 +239,7 @@ func Test_CgroupfsCgroupPathContainerDirFn(t *testing.T) {
 			name:        "cri-o",
 			containerID: "cri-o://testCrioContainerID",
 			wantType:    RuntimeTypeCrio,
-			wantDirName: "testPouchContainerID",
+			wantDirName: "testCrioContainerID",
 			wantError:   false,
 		},
 		{
