@@ -55,7 +55,7 @@ func Test_NewCrioRuntimeHandler(t *testing.T) {
 	unixEndPoint = fmt.Sprintf("unix://%s", CrioEndpoint1)
 	crioRuntime, err = NewCrioRuntimeHandler(unixEndPoint)
 	assert.NoError(t, err)
-	assert.NotNil(t, criodRuntime)
+	assert.NotNil(t, crioRuntime)
 }
 
 func Test_Crio_StopContainer(t *testing.T) {
