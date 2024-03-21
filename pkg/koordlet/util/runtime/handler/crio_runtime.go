@@ -19,23 +19,16 @@ package handler
 import (
 	"context"
 	"fmt"
-	"net"
-	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
 
-	"google.golang.org/grpc"
 	runtimeapi "k8s.io/cri-api/pkg/apis/runtime/v1"
 
 	"github.com/koordinator-sh/koordinator/pkg/koordlet/util/system"
 )
 
-/*
-var (
-	GrpcDial = grpc.DialContext // for test
-)*/
 
 func GetCrioEndpoint() string {
 	return filepath.Join(system.Conf.VarRunRootDir, "crio/crio.sock")
@@ -107,60 +100,3 @@ func (c *CrioRuntimeHandler) UpdateContainerResources(containerID string, opts U
 	_, err := c.runtimeServiceClient.UpdateContainerResources(ctx, request)
 	return err
 }
-
-/*
-func getRuntimeClient(endpoint string) (runtimeapi.RuntimeServiceClient, error) {
-	conn, err := getClientConnection(endpoint)
-	if err != nil {
-		return nil, fmt.Errorf("failed to connect: %v", err)
-	}
-	runtimeClient := runtimeapi.NewRuntimeServiceClient(conn)
-	return runtimeClient, nil
-}
-
-func getClientConnection(endpoint string) (*grpc.ClientConn, error) {
-	addr, dialer, err := getAddressAndDialer(endpoint)
-	if err != nil {
-		return nil, err
-	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), defaultConnectionTimeout)
-	defer cancel()
-
-	conn, err := GrpcDial(ctx, addr, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithContextDialer(dialer))
-	if err != nil {
-		return nil, fmt.Errorf("failed to connect, make sure you are running as root and the runtime has been started: %v", err)
-	}
-
-	return conn, nil
-}
-
-func getAddressAndDialer(endpoint string) (string, func(context context.Context, addr string) (net.Conn, error), error) {
-	protocol, addr, err := parseEndpoint(endpoint)
-	if err != nil {
-		return "", nil, err
-	}
-	if protocol != unixProtocol {
-		return "", nil, fmt.Errorf("only support unix socket endpoint")
-	}
-	return addr, dial, nil
-}
-
-func parseEndpoint(endpoint string) (string, string, error) {
-	u, err := url.Parse(endpoint)
-	if err != nil {
-		return "", "", err
-	}
-
-	switch u.Scheme {
-	case unixProtocol:
-		return unixProtocol, u.Path, nil
-	default:
-		return u.Scheme, "", fmt.Errorf("protocol %q is not supported", u.Scheme)
-	}
-}
-
-func dial(context context.Context, addr string) (net.Conn, error) {
-	var d net.Dialer
-	return d.DialContext(context, unixProtocol, addr)
-}*/
