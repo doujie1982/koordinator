@@ -85,8 +85,8 @@ func (c *CrioRuntimeHandler) StopContainer(containerID string, timeout int64) er
 	return err
 }
 
-/*
-func (c *ContainerdRuntimeHandler) UpdateContainerResources(containerID string, opts UpdateOptions) error {
+
+func (c *CrioRuntimeHandler) UpdateContainerResources(containerID string, opts UpdateOptions) error {
 	if containerID == "" {
 		return fmt.Errorf("containerID cannot be empty")
 	}
@@ -108,6 +108,7 @@ func (c *ContainerdRuntimeHandler) UpdateContainerResources(containerID string, 
 	return err
 }
 
+/*
 func getRuntimeClient(endpoint string) (runtimeapi.RuntimeServiceClient, error) {
 	conn, err := getClientConnection(endpoint)
 	if err != nil {
