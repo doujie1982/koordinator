@@ -32,9 +32,10 @@ import (
 	"github.com/koordinator-sh/koordinator/pkg/koordlet/util/system"
 )
 
+/*
 var (
 	GrpcDial = grpc.DialContext // for test
-)
+)*/
 
 func GetCrioEndpoint() string {
 	return filepath.Join(system.Conf.VarRunRootDir, "crio/crio.sock")
@@ -84,6 +85,7 @@ func (c *CrioRuntimeHandler) StopContainer(containerID string, timeout int64) er
 	return err
 }
 
+/*
 func (c *ContainerdRuntimeHandler) UpdateContainerResources(containerID string, opts UpdateOptions) error {
 	if containerID == "" {
 		return fmt.Errorf("containerID cannot be empty")
@@ -160,4 +162,4 @@ func parseEndpoint(endpoint string) (string, string, error) {
 func dial(context context.Context, addr string) (net.Conn, error) {
 	var d net.Dialer
 	return d.DialContext(context, unixProtocol, addr)
-}
+}*/
