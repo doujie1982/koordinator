@@ -161,11 +161,10 @@ var cgroupPathFormatterInSystemd = Formatter{
 		for i := range patterns {
 			if strings.HasPrefix(basename, patterns[i].prefix) && strings.HasSuffix(basename, patterns[i].suffix) {
 				return basename[len(patterns[i].prefix) : len(basename)-len(patterns[i].suffix)], nil
-			} else {
-				if strings.HasPrefix(basename, "crio-") {
-					return basename[len("crio-") : len(basename)], nil
-				}
-			}
+			} 
+		}
+		if strings.HasPrefix(basename, "crio-") {
+			return basename[len("crio-") : len(basename)], nil
 		}
 		return "", fmt.Errorf("fail to parse container id: %v", basename)
 	},
