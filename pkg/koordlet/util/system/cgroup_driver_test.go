@@ -109,6 +109,10 @@ func Test_ParseContainerIDSystemd(t *testing.T) {
 			expeceted: "12345",
 		},
 		{
+			basename:  "cri-o-12345.scope",
+			expeceted: "12345",
+		},
+		{
 			basename:  "12345",
 			wantError: true,
 		},
@@ -180,6 +184,13 @@ func Test_SystemdCgroupPathContainerDirFn(t *testing.T) {
 			wantError:   false,
 		},
 		{
+			name:        "cri-o",
+			containerID: "cri-o://testCrioContainerID",
+			wantType:    RuntimeTypeCrio,
+			wantDirName: "cri-o.scope",
+			wantError:   false,
+		},
+		{
 			name:        "bad-format",
 			containerID: "bad-format-id",
 			wantType:    RuntimeTypeUnknown,
@@ -221,6 +232,13 @@ func Test_CgroupfsCgroupPathContainerDirFn(t *testing.T) {
 			name:        "pouch",
 			containerID: "pouch://testPouchContainerID",
 			wantType:    RuntimeTypePouch,
+			wantDirName: "testPouchContainerID",
+			wantError:   false,
+		},
+		{
+			name:        "cri-o",
+			containerID: "cri-o://testCrioContainerID",
+			wantType:    RuntimeTypeCrio,
 			wantDirName: "testPouchContainerID",
 			wantError:   false,
 		},
