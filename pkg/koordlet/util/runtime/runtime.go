@@ -184,7 +184,7 @@ func getCrioEndpoint() (string, error) {
 	}
 
 	if len(system.Conf.CrioEndPoint) > 0 && isFile(system.Conf.CrioEndPoint) {
-		klog.Infof("find cri-o Endpoint : %v", system.Conf.ContainerdEndPoint)
+		klog.Infof("find cri-o Endpoint : %v", system.Conf.CrioEndPoint)
 		return fmt.Sprintf("unix://%s", system.Conf.CrioEndPoint), nil
 	}
 
