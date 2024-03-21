@@ -108,7 +108,7 @@ var cgroupPathFormatterInSystemd = Formatter{
 		case RuntimeTypePouch:
 			return RuntimeTypePouch, fmt.Sprintf("pouch-%s.scope", hashID[1]), nil
                 case RuntimeTypeCrio:
-                        return RuntimeTypeCrio, fmt.Sprintf("cri-o-%s.scope", hashID[1]), nil
+                        return RuntimeTypeCrio, fmt.Sprintf("crio-%s.scope", hashID[1]), nil
 		default:
 			return RuntimeTypeUnknown, "", fmt.Errorf("unknown container protocol %s", id)
 		}
@@ -126,7 +126,6 @@ var cgroupPathFormatterInSystemd = Formatter{
 				prefix: "kubepods-burstable-pod",
 				suffix: ".slice",
 			},
-
 			{
 				prefix: "kubepods-pod",
 				suffix: ".slice",
@@ -151,6 +150,10 @@ var cgroupPathFormatterInSystemd = Formatter{
 			},
 			{
 				prefix: "cri-containerd-",
+				suffix: ".scope",
+			},
+			{
+				prefix: "crio-",
 				suffix: ".scope",
 			},
 		}
