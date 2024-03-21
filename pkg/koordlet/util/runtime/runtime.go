@@ -32,6 +32,7 @@ var (
 	DockerHandler     handler.ContainerRuntimeHandler
 	ContainerdHandler handler.ContainerRuntimeHandler
 	PouchHandler      handler.ContainerRuntimeHandler
+	CrioHandler       handler.ContainerRuntimeHandler
 	mutex             = &sync.Mutex{}
 )
 
